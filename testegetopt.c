@@ -4,8 +4,8 @@
 
 int main(int argc, char *argv[])
 {
-	int flag, opt, argt;
-	char t;
+	int flag, argt;
+	char t, opt;
 
 	while((opt = getopt(argc, argv, "nt:")) != -1){
 		switch (opt) {
