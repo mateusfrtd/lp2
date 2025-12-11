@@ -18,11 +18,15 @@ int main(void) {
 	int wflag = 1;
 	Painel *cabeca = (Painel *) malloc(sizeof(Painel));
 	cabeca->prox = NULL;
-	
-	opcoes();
-	scanf("%d", &op);
+	printf("FaÃa o primeiro registro para iniciar!\n");
+	printf("DescriÃÃo: ");
+	cabeca->id = 0;
+	fgets(cabeca->description, 255, stdin);
 	
 	while(wflag) {
+		opcoes();
+		scanf("%d", &op);
+		getchar();
 		switch(op) {
 			case 1:
 				listar(cabeca);
@@ -31,7 +35,8 @@ int main(void) {
 				registrar(cabeca);
 				break;
 			case 3:
-				remover(cabeca);
+				printf("Funcionabilidade em desenvolvimento...\n");
+				//remover(cabeca);
 				break;
 			default:
 				wflag = 0;
@@ -52,18 +57,27 @@ void opcoes() {
 
 void registrar(Painel *cabeca) {
 	Painel *novo = (Painel *) malloc(sizeof(Painel));
-	static int id = 0;
+	static int id = 1;
 	novo->id = id;
 	printf("DescriÃÃ£o: ");
 	fgets(novo->description, 255, stdin);
 	novo->prox = NULL;
 
-	Painel *aux = novo;
-	while(aux != NULL) {
+	Painel *aux = cabeca;
+	while(aux->prox != NULL) {
 		aux = aux->prox;
 	}
-	aux = novo;
+	aux->prox = novo;
 	id++;
 }
 
-void remover
+void listar(Painel *cabeca) {
+	Painel *aux = cabeca;
+	
+	while(aux != NULL) {
+		printf("Task\n\
+ Id: %d \n\
+ DescriÃÃo: %s\n\n", aux->id, aux->description);
+	aux = aux->prox;
+	}
+}
